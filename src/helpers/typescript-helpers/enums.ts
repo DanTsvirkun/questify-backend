@@ -4,13 +4,13 @@ export enum ReqBodyParts {
   QUERY = "query",
 }
 
-export enum Difficulty {
+export enum CardDifficulty {
   EASY = "Easy",
   NORMAL = "Normal",
   HARD = "Hard",
 }
 
-export enum Status {
+export enum CardStatus {
   INCOMPLETE = "Incomplete",
   COMPLETE = "Complete",
 }
@@ -18,4 +18,13 @@ export enum Status {
 export enum CardType {
   TASK = "Task",
   CHALLENGE = "Challenge",
+}
+
+export enum CardCategory {
+  STUFF = "Stuff",
+  FAMILY = "Family",
+  HEALTH = "Health",
+  LEARNING = "Learning",
+  LEISURE = "Leisure",
+  WORK = "Work",
 }

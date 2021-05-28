@@ -10,7 +10,8 @@ const userSchema = new Schema({
       difficulty: String,
       date: String,
       status: String,
-      type: String,
+      category: String,
+      type: { type: String },
     },
   ],
 });

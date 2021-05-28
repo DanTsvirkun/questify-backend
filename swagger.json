@@ -167,6 +167,174 @@
           }
         }
       }
+    },
+    "/card": {
+      "post": {
+        "tags": ["Card"],
+        "summary": "Create card",
+        "security": [{ "Bearer": [] }],
+        "parameters": [],
+        "requestBody": {
+          "description": "Card's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CardRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CardResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Card"],
+        "summary": "Edit card",
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cardId",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "Card's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditCardRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EditCardResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body or 'cardId')",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Card"],
+        "summary": "Delete card",
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cardId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad request (invalid request body or 'cardId')",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        }
+      },
+      "get": {
+        "tags": ["Card"],
+        "summary": "Get all user card",
+        "security": [{ "Bearer": [] }],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCardResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (no token provided)",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/card/complete": {
+      "patch": {
+        "tags": ["Card"],
+        "summary": "Confirm that card is completed",
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cardId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompleteCardResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body or 'cardId')",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        }
+      }
     }
   },
   "components": {
@@ -319,6 +487,263 @@
             "type": "string",
             "description": "New session's id",
             "example": "507f1f77bcf86cd799439009"
+          }
+        }
+      },
+      "CardRequest": {
+        "required": ["title", "difficulty", "type", "date"],
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Card's title",
+            "example": "Take out the trash"
+          },
+          "difficulty": {
+            "type": "string",
+            "description": "Card's difficulty",
+            "enum": ["Easy", "Normal", "Hard"]
+          },
+          "category": {
+            "type": "string",
+            "description": "Card's category",
+            "enum": ["Stuff", "Family", "Health", "Learning", "Leisure", "Work"]
+          },
+          "date": {
+            "type": "string",
+            "description": "Card's date (deadline, if card is challenge)",
+            "example": "2020-12-31"
+          },
+          "type": {
+            "type": "string",
+            "description": "Card's type",
+            "enum": ["Task", "Challenge"]
+          }
+        }
+      },
+      "CardResponse": {
+        "type": "object",
+        "properties": {
+          "createdCard": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "Card's title",
+                "example": "Take out the trash"
+              },
+              "difficulty": {
+                "type": "string",
+                "description": "Card's difficulty",
+                "enum": ["Easy", "Normal", "Hard"]
+              },
+              "category": {
+                "type": "string",
+                "description": "Card's category",
+                "enum": [
+                  "Stuff",
+                  "Family",
+                  "Health",
+                  "Learning",
+                  "Leisure",
+                  "Work"
+                ]
+              },
+              "date": {
+                "type": "string",
+                "description": "Card's date (deadline, if card is challenge)",
+                "example": "2020-12-31"
+              },
+              "status": {
+                "type": "string",
+                "description": "Card's status",
+                "enum": ["Incomplete", "Complete"]
+              },
+              "type": {
+                "type": "string",
+                "description": "Card's type",
+                "enum": ["Task", "Challenge"]
+              },
+              "_id": {
+                "type": "string",
+                "description": "Card's id",
+                "example": "507f1f77bcf86cd799439013"
+              }
+            }
+          }
+        }
+      },
+      "EditCardRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Card's title",
+            "example": "Take out the trash"
+          },
+          "difficulty": {
+            "type": "string",
+            "description": "Card's difficulty",
+            "enum": ["Easy", "Normal", "Hard"]
+          },
+          "category": {
+            "type": "string",
+            "description": "Card's category",
+            "enum": ["Stuff", "Family", "Health", "Learning", "Leisure", "Work"]
+          },
+          "date": {
+            "type": "string",
+            "description": "Card's date (deadline, if card is challenge)",
+            "example": "2020-12-31"
+          },
+          "type": {
+            "type": "string",
+            "description": "Card's type",
+            "enum": ["Task", "Challenge"]
+          }
+        }
+      },
+      "EditCardResponse": {
+        "type": "object",
+        "properties": {
+          "editedCard": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "Card's title",
+                "example": "Take out the trash"
+              },
+              "difficulty": {
+                "type": "string",
+                "description": "Card's difficulty",
+                "enum": ["Easy", "Normal", "Hard"]
+              },
+              "category": {
+                "type": "string",
+                "description": "Card's category",
+                "enum": [
+                  "Stuff",
+                  "Family",
+                  "Health",
+                  "Learning",
+                  "Leisure",
+                  "Work"
+                ]
+              },
+              "date": {
+                "type": "string",
+                "description": "Card's date (deadline, if card is challenge)",
+                "example": "2020-12-31"
+              },
+              "status": {
+                "type": "string",
+                "description": "Card's status",
+                "enum": ["Incomplete", "Complete"]
+              },
+              "type": {
+                "type": "string",
+                "description": "Card's type",
+                "enum": ["Task", "Challenge"]
+              }
+            }
+          }
+        }
+      },
+      "CompleteCardResponse": {
+        "type": "object",
+        "properties": {
+          "editedCard": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "Card's title",
+                "example": "Take out the trash"
+              },
+              "difficulty": {
+                "type": "string",
+                "description": "Card's difficulty",
+                "enum": ["Easy", "Normal", "Hard"]
+              },
+              "category": {
+                "type": "string",
+                "description": "Card's category",
+                "enum": [
+                  "Stuff",
+                  "Family",
+                  "Health",
+                  "Learning",
+                  "Leisure",
+                  "Work"
+                ]
+              },
+              "date": {
+                "type": "string",
+                "description": "Card's date (deadline, if card is challenge)",
+                "example": "2020-12-31"
+              },
+              "status": {
+                "type": "string",
+                "description": "Card's status",
+                "enum": ["Incomplete", "Complete"],
+                "example": "Complete"
+              },
+              "type": {
+                "type": "string",
+                "description": "Card's type",
+                "enum": ["Task", "Challenge"]
+              },
+              "_id": {
+                "type": "string",
+                "description": "Card's id",
+                "example": "507f1f77bcf86cd799439013"
+              }
+            }
+          }
+        }
+      },
+      "GetCardResponse": {
+        "type": "object",
+        "properties": {
+          "cards": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "description": "User's card",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "description": "Card's title",
+                  "example": "Take out the trash"
+                },
+                "difficulty": {
+                  "type": "string",
+                  "description": "Card's difficulty",
+                  "enum": ["Easy", "Normal", "Hard"]
+                },
+                "date": {
+                  "type": "string",
+                  "description": "Card's date (deadline, if card is challenge)",
+                  "example": "2020-12-31"
+                },
+                "status": {
+                  "type": "string",
+                  "description": "Card's status",
+                  "enum": ["Incomplete", "Complete"]
+                },
+                "type": {
+                  "type": "string",
+                  "description": "Card's type",
+                  "enum": ["Task", "Challenge"]
+                },
+                "_id": {
+                  "type": "string",
+                  "description": "Card's id",
+                  "example": "507f1f77bcf86cd799439013"
+                }
+              }
+            }
           }
         }
       }
