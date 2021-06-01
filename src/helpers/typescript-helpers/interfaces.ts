@@ -11,6 +11,7 @@ export interface ICard extends Document {
   title: string;
   difficulty: CardDifficulty.EASY | CardDifficulty.NORMAL | CardDifficulty.HARD;
   date: string;
+  time: string;
   status: CardStatus.COMPLETE | CardStatus.INCOMPLETE;
   category: CardCategory;
   type: CardType;

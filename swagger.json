@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "version": "2.0.1",
+    "version": "2.0.2",
     "title": "Questify API docs",
     "description": "API documentation for GoIT project 'Questify'. [Backend github repository](https://github.com/DanTsvirkun/questify-backend)",
     "license": {
@@ -438,6 +438,11 @@
                       "description": "Card's date (deadline, if card is challenge)",
                       "example": "2020-12-31"
                     },
+                    "time": {
+                      "type": "string",
+                      "description": "Card's time (deadline, if card is challenge)",
+                      "example": "20:30"
+                    },
                     "status": {
                       "type": "string",
                       "description": "Card's status",
@@ -514,6 +519,11 @@
             "description": "Card's date (deadline, if card is challenge)",
             "example": "2020-12-31"
           },
+          "time": {
+            "type": "string",
+            "description": "Card's time (deadline, if card is challenge)",
+            "example": "20:30"
+          },
           "type": {
             "type": "string",
             "description": "Card's type",
@@ -553,6 +563,11 @@
                 "type": "string",
                 "description": "Card's date (deadline, if card is challenge)",
                 "example": "2020-12-31"
+              },
+              "time": {
+                "type": "string",
+                "description": "Card's time (deadline, if card is challenge)",
+                "example": "20:30"
               },
               "status": {
                 "type": "string",
@@ -596,6 +611,11 @@
             "description": "Card's date (deadline, if card is challenge)",
             "example": "2020-12-31"
           },
+          "time": {
+            "type": "string",
+            "description": "Card's time (deadline, if card is challenge)",
+            "example": "20:30"
+          },
           "type": {
             "type": "string",
             "description": "Card's type",
@@ -635,6 +655,11 @@
                 "type": "string",
                 "description": "Card's date (deadline, if card is challenge)",
                 "example": "2020-12-31"
+              },
+              "time": {
+                "type": "string",
+                "description": "Card's time (deadline, if card is challenge)",
+                "example": "20:30"
               },
               "status": {
                 "type": "string",
@@ -683,6 +708,11 @@
                 "description": "Card's date (deadline, if card is challenge)",
                 "example": "2020-12-31"
               },
+              "time": {
+                "type": "string",
+                "description": "Card's time (deadline, if card is challenge)",
+                "example": "20:30"
+              },
               "status": {
                 "type": "string",
                 "description": "Card's status",
@@ -726,6 +756,11 @@
                   "type": "string",
                   "description": "Card's date (deadline, if card is challenge)",
                   "example": "2020-12-31"
+                },
+                "time": {
+                  "type": "string",
+                  "description": "Card's time (deadline, if card is challenge)",
+                  "example": "20:30"
                 },
                 "status": {
                   "type": "string",

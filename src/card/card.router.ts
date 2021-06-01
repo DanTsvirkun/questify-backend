@@ -31,6 +31,18 @@ const createCardSchema = Joi.object({
       return value;
     })
     .required(),
+  time: Joi.string()
+    .custom((value, helpers) => {
+      const timeRegex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
+      const isValidTime = timeRegex.test(value);
+      if (!isValidTime) {
+        return helpers.message({
+          custom: "Invalid 'time'. Please, use HH:MM string format",
+        });
+      }
+      return value;
+    })
+    .required(),
   type: Joi.string().valid(CardType.TASK, CardType.CHALLENGE).required(),
   category: Joi.string()
     .valid(
@@ -55,6 +67,16 @@ const editCardSchema = Joi.object({
     if (!isValidDate) {
       return helpers.message({
         custom: "Invalid 'date'. Please, use YYYY-MM-DD string format",
+      });
+    }
+    return value;
+  }),
+  time: Joi.string().custom((value, helpers) => {
+    const timeRegex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
+    const isValidTime = timeRegex.test(value);
+    if (!isValidTime) {
+      return helpers.message({
+        custom: "Invalid 'time'. Please, use HH:MM string format",
       });
     }
     return value;

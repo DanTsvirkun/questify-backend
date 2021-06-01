@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { IUser, ICard } from "../helpers/typescript-helpers/interfaces";
+import { IUser } from "../helpers/typescript-helpers/interfaces";
 import { CardStatus } from "../helpers/typescript-helpers/enums";
 
 export const createCard = async (req: Request, res: Response) => {
@@ -63,5 +63,5 @@ export const deleteCard = async (req: Request, res: Response) => {
 
 export const getAllCards = async (req: Request, res: Response) => {
   const user = req.user;
-  return res.status(200).send({cards: user?.cards})
-}
+  return res.status(200).send({ cards: user?.cards });
+};

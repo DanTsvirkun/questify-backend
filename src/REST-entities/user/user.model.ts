@@ -9,6 +9,7 @@ const userSchema = new Schema({
       title: String,
       difficulty: String,
       date: String,
+      time: String,
       status: String,
       category: String,
       type: { type: String },

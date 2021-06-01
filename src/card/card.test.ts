@@ -53,6 +53,7 @@ describe("Card router test suite", () => {
       type: CardType.TASK,
       category: CardCategory.STUFF,
       date: "2020-12-31",
+      time: "20:30",
     };
 
     const invalidReqBody = {
@@ -61,6 +62,7 @@ describe("Card router test suite", () => {
       type: "Taskk",
       category: CardCategory.STUFF,
       date: "2020-12-31",
+      time: "20:30",
     };
 
     it("Init endpoint testing", () => {
@@ -89,6 +91,7 @@ describe("Card router test suite", () => {
             type: CardType.TASK,
             category: CardCategory.STUFF,
             date: "2020-12-31",
+            time: "20:30",
             status: CardStatus.INCOMPLETE,
             _id: createdCard?._id,
           },
@@ -191,6 +194,7 @@ describe("Card router test suite", () => {
             type: CardType.TASK,
             category: CardCategory.STUFF,
             date: "2020-12-31",
+            time: "20:30",
             status: CardStatus.INCOMPLETE,
             _id: response.body.editedCard._id,
           },
@@ -280,6 +284,7 @@ describe("Card router test suite", () => {
             type: CardType.TASK,
             category: CardCategory.STUFF,
             date: "2020-12-31",
+            time: "20:30",
             status: CardStatus.COMPLETE,
             _id: response.body.completedCard._id,
           },
@@ -370,6 +375,7 @@ describe("Card router test suite", () => {
               type: CardType.TASK,
               category: CardCategory.STUFF,
               date: "2020-12-31",
+              time: "20:30",
               status: CardStatus.COMPLETE,
               _id: response.body.cards[0]._id,
             },
