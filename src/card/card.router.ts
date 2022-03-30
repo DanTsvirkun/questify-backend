@@ -18,7 +18,7 @@ import {
 } from "../helpers/typescript-helpers/enums";
 
 const createCardSchema = Joi.object({
-  title: Joi.string().required(),
+  title: Joi.string().min(2).max(100).required(),
   date: Joi.string()
     .custom((value, helpers) => {
       const dateRegex = /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])/;
@@ -60,7 +60,7 @@ const createCardSchema = Joi.object({
 });
 
 const editCardSchema = Joi.object({
-  title: Joi.string(),
+  title: Joi.string().min(2).max(100),
   date: Joi.string().custom((value, helpers) => {
     const dateRegex = /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])/;
     const isValidDate = dateRegex.test(value);
